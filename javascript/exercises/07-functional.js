@@ -23,22 +23,40 @@ const mapNameFamily = (characters) => {
   // Return an array with the name and house of each character
   // Format: "Arya, of House Stark"
 
-  return characters;
+  const nameFamily = characters.map((character) => {
+    return `${character.name}, of House ${character.house}`;
+  });
+
+  return nameFamily;
 };
 
 const filterFamily = (characters, house) => {
   // Return an array with only the characters from a given house
 
-  return characters;
+  let filteredCharacters = characters.filter((character) => {
+    return character.house === house;
+  });
+
+  return filteredCharacters;
 };
 
 const reduceHouses = (characters) => {
   // Return an object with the number of characters from each house
 
-  return characters;
+
+
+  let charactersByHouse = characters.reduce((acc, curr) => {
+     (acc.hasOwnProperty(curr.house)) ?
+      acc[curr.house]++:
+      acc[curr.house] = 1
+
+      return acc;
+  }, {});
+
+  return charactersByHouse;
 };
 
-console.log(mapNameFamily(characters));
+// console.log(mapNameFamily(characters));
 // [
 //   'Arya, of House Stark',
 //   'Sansa, of House Stark',
@@ -60,7 +78,7 @@ console.log(mapNameFamily(characters));
 //   'Brienne, of House Tarth'
 // ]
 
-console.log(filterFamily(characters, 'Stark'));
+// console.log(filterFamily(characters, 'Stark'));
 // [
 //   { id: 1, name: 'Arya', house: 'Stark' },
 //   { id: 4, name: 'Sansa', house: 'Stark' },
@@ -70,7 +88,7 @@ console.log(filterFamily(characters, 'Stark'));
 //   { id: 28, name: 'Rickon', house: 'Stark' }
 // ]
 
-console.log(filterFamily(characters, 'Greyjoy'));
+// console.log(filterFamily(characters, 'Greyjoy'));
 // [
 //   { id: 83, name: 'Theon', house: 'Greyjoy' },
 //   { id: 84, name: 'Yara', house: 'Greyjoy' }
